@@ -54,6 +54,14 @@ as well as validation for post-production deployment.
 
 ## Contributing
 
+Guard is set up for your ease of development. Here's how to go from 0 to
+ready.
+
+    $ git clone https://github.com/jondot/rack-ping
+    $ cd rack-ping
+    $ bundle install
+    $ guard
+
 Fork, implement, add tests, pull request, get my everlasting thanks and a respectable place here :).
 
 
