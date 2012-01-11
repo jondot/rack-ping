@@ -31,15 +31,6 @@ until spitting out an error.
   you to use, to configure against LB quirks. The default config should
 work against ELBs (Amazon elastic LB).
 
-  :version => '0',
-        :check_url => nil,
-        :ok_regex => nil,
-        :ok_text => 'ok',
-        :ok_code => 200,
-        :timeout_secs => 5,
-        :error_text => 'error',
-        :error_code => 500
-
 ## Headers
 
 `ping` will output intelligent headers. First `x-ping-error` will try to
