@@ -14,6 +14,15 @@ Here is a simple example (see `examples`)
 
     run lambda{|env| [200, {'Content-Type' => 'text/html'}, ["hello"]]}
 
+
+Note: for pre-1.4.0 Rack, do this:
+
+    p = Rack::Ping.new(nil)
+    p.check { true }
+    run Rack::URLMap.new("/" => My::App, "/ping" => p)
+
+Due to different `to_app` strategy: https://github.com/rack/rack/blob/master/lib/rack/builder.rb#L130
+
 ## Options
 
 When building/mounting your rack, use the `ping` configuration variable,
