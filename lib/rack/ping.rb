@@ -4,7 +4,7 @@ module Rack
   class Ping
     attr_reader :config
 
-    def initialize(app)
+    def initialize(app=nil)
       @config = {
         :version => '0',
         :check_url => nil,

@@ -3,21 +3,40 @@ A Rack middleware that should indicate the health of your service.
 
 
 ## Usage
-Here is a simple example (see `examples`)
 
-    map '/ping' do
-      use Rack::Ping do |ping|
-        ping.check_url  "http://localhost:9292/"
-        ping.ok_regex /goodbye/
-      end
-    end
+Here is a simple example (see `examples`):
 
-    run lambda{|env| [200, {'Content-Type' => 'text/html'}, ["hello"]]}
+```ruby
+map '/ping' do
+  use Rack::Ping do |ping|
+    ping.check_url  "http://localhost:9292/"
+    ping.ok_regex /goodbye/
+  end
+end
+
+run lambda{|env| [200, {'Content-Type' => 'text/html'}, ["hello"]]}
+```
+
+If you also run on Rails, for more control, you can also use it in directly your routes:
+
+```ruby
+# no block
+Rails.application.routes.draw do
+  mount Rack::Ping.new => '/ping'
+end
+
+# using a ping block
+Rails.application.routes.draw do
+  mount Rack::Ping.new { |ping|
+    ping.check_url "http://example.com"
+  }, at: '/ping'
+end
+```
 
 
 Note: for pre-1.4.0 Rack, do this:
 
-    p = Rack::Ping.new(nil)
+    p = Rack::Ping.new
     p.check { true }
     run Rack::URLMap.new("/" => My::App, "/ping" => p)
 
